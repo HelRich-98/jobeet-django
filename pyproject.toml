@@ -1,0 +1,14 @@
+[project]
+name = "jobeet"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=6.0",
+    "django-tailwind[cookiecutter,honcho,reload]>=4.4.2",
+    "django-unfold>=0.74.1",
+    "fake-py>=0.12.2",
+    "pillow>=12.0.0",
+    "python-decouple>=3.8",
+]
