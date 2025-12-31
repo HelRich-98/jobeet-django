@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,18 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-z^$i_e)&_0al2-3ga7kz8j4g+b38w=ru_w6w%0b9sq=s7%*8*s"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", False)
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "jobeet.localhost",
-    "www.jobeet.localhost",
-]
-
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", "").split(",")
 
 # Application definition
 
