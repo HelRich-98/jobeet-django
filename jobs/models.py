@@ -51,12 +51,25 @@ class Company(models.Model):
 
 
 class Job(models.Model):
+    JOB_TYPES = [
+        ("full_time", "Temps plein"),
+        ("part_time", "Temps partiel"),
+        ("contract", "Contrat"),
+        ("internship", "Stage"),
+        ("temporary", "Temporaire"),
+    ]
+
     title = models.CharField(_("Titre"), max_length=250, unique=True)
     slug = models.SlugField(_("Slug"))
     position = models.CharField(_("Position"), max_length=250)
     description = models.TextField(_("Description"))
 
     location = models.CharField(_("Localisation"), max_length=100)
+    job_type = models.CharField(
+        max_length=20,
+        choices=JOB_TYPES,
+        default="Temps plein",
+    )
     is_validate = models.BooleanField(_("Est valide"), default=False)
     category = models.ForeignKey(
         "Category",
