@@ -1,0 +1,17 @@
+<nav
+  class="navbar flex w-full items-center justify-between gap-2 shadow-base-300/20 shadow-sm"
+>
+  <div class="navbar-start max-md:w-1/4">
+    <a
+      class="link text-base-content link-neutral text-xl font-bold no-underline"
+      href="/"
+    >
+      Jobeet
+    </a>
+  </div>
+  <div class="navbar-end items-center gap-4">
+    <a class="btn btn-primary" href="{% url 'jobs:job_create' %}">
+      <span class="">POST A JOB</span>
+    </a>
+  </div>
+</nav>

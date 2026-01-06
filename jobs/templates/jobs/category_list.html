@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+<!-- prettier-ignore -->
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<section class="py-16">
+  <div
+    class="text-base-content pb-5 text-left text-lg font-semibold rtl:text-right"
+  >
+    Liste des categories
+    <p class="text-base-content/80 mt-1 text-sm font-normal">
+      Browse a list of category information such as name, job's count & more.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    {% for category in category_list %}
+
+    <div
+      class="card hover:motion-scale-out-102 motion-ease-spring-smooth hover:z-30 hover:shadow-lg"
+    >
+      <div class="card-body">
+        <h5 class="card-title mb-0">{{ category.name }}</h5>
+
+        <div>{{ category.description|truncatewords:20 }}</div>
+
+        <div class="card-actions mt-4">
+          <div class="w-full flex justify-between">
+            <div class="flex items-center">
+              <span
+                class="badge badge-primary badge-soft me-2 rounded-full p-1"
+              >
+                {{ category.jobs.count }}
+              </span>
+              Emplois
+            </div>
+
+            <a
+              href="{{ category.get_absolute_url }}"
+              class="link link-primary no-underline"
+            >
+              <span class="icon-[tabler--circle-arrow-right] size-10"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% empty %} {% include 'includes/card_empty.html' with info="Aucune
+    categorie" %} {% endfor %}
+  </div>
+
+  {% include 'includes/pagination.html' %}
+</section>
+{% endblock %}

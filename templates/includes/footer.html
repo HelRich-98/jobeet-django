@@ -1,0 +1,19 @@
+<footer class="footer items-center px-6 py-4 bg-base-200/60 mt-auto">
+  <aside class="grid-flow-col items-center">
+    <p>©2026 <a class="link link-hover font-medium" href="#">Jobeet</a></p>
+  </aside>
+
+  {% load flatpages %}
+
+  <nav
+    class="text-base-content grid-flow-col gap-4 md:place-self-center md:justify-self-end"
+  >
+    {% get_flatpages as flatpages %}
+
+    <!-- prettier-ignore -->
+
+    {% for page in flatpages %}
+    <a href="{{ page.url }}">{{ page.title }}</a>
+    {% endfor %}
+  </nav>
+</footer>

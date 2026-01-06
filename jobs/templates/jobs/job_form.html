@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+<!-- prettier-ignore -->
+
+{% block title %}Poster un emploi{% endblock %}
+
+{% block content %}
+<section class="py-16">
+  <h1 class="text-5xl mb-4">Ajouter un emploi</h1>
+
+  <form action="" method="post">
+    {% csrf_token %} {{ form }}
+
+    <button class="btn btn-primary mt-4">Poster</button>
+  </form>
+</section>
+{% endblock %} {% block extra_script %}
+
+<script>
+  window.addEventListener("load", function () {
+    // Basic
+    flatpickr("#id_expired_at", {
+      monthSelectorType: "static",
+      dateFormat: "d/m/Y",
+    });
+  });
+</script>
+
+{% endblock %}

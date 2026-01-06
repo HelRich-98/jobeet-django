@@ -1,12 +1,13 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 # JOB CATEGORY
 
 
 class Category(models.Model):
-    name = models.CharField(_("Nom"), max_length=50)
+    name = models.CharField(_("Nom"), max_length=50, unique=True)
     description = models.TextField(_("Description"), blank=True)
 
     class Meta:
@@ -17,7 +18,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("category_detail", kwargs={"pk": self.pk})
+        return reverse("jobs:category_detail", kwargs={"name": self.name})
 
 
 # COMPANY
@@ -43,14 +44,14 @@ class Company(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("company_detail", kwargs={"pk": self.pk})
+        return reverse("jobs:company_detail", kwargs={"pk": self.pk})
 
 
 # JOB
 
 
 class Job(models.Model):
-    title = models.CharField(_("Titre"), max_length=250)
+    title = models.CharField(_("Titre"), max_length=250, unique=True)
     slug = models.SlugField(_("Slug"))
     position = models.CharField(_("Position"), max_length=250)
     description = models.TextField(_("Description"))
@@ -85,9 +86,16 @@ class Job(models.Model):
     class Meta:
         verbose_name = _("Job")
         verbose_name_plural = _("Jobs")
+        ordering = ("-created_at", "title")
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("job_detail", kwargs={"pk": self.pk})
+        return reverse("jobs:job_detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)

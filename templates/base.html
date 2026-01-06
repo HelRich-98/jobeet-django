@@ -1,0 +1,33 @@
+{% load static tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Accueil{% endblock %} - Jobeet</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'css/flatpickr.css' %}" />
+    {% tailwind_css %}
+  </head>
+
+  <body
+    class="relative bg-gray-200 text-base-content min-h-screen flex flex-col"
+  >
+    {% include 'includes/navbar.html' %}
+
+    <main>
+      {% block hero %}{% endblock %}
+
+      <div class="px-4 md:px-0 container mx-auto">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    <script src="{% static 'js/flyonui.js' %}"></script>
+    <script src="{% static 'js/flatpickr.js' %}"></script>
+
+    {% block extra_script %}{% endblock %}
+  </body>
+</html>

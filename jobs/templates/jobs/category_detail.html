@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+<!-- prettier-ignore -->
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+<section class="py-16 space-y-4">
+  <h3 class="text-2xl font-bold">{{ category.name }}</h3>
+
+  <div
+    id="show-hide-collapse-heading"
+    class="collapse hidden w-full overflow-hidden transition-[height] duration-300"
+    aria-labelledby="show-hide-collapse"
+  >
+    <p class="text-base-content/80">{{ category.description }}</p>
+  </div>
+
+  <button
+    type="button"
+    class="collapse-toggle link link-primary inline-flex items-center"
+    id="show-hide-collapse"
+    aria-expanded="false"
+    aria-controls="show-hide-collapse-heading"
+    data-collapse="#show-hide-collapse-heading"
+  >
+    <span class="collapse-open:hidden">Plus</span>
+    <span class="collapse-open:block hidden">Moins</span>
+    <span
+      class="icon-[tabler--chevron-down] collapse-open:rotate-180 ms-2 size-4"
+    ></span>
+  </button>
+
+  <div class="divider"></div>
+
+  <!-- job's categorie-->
+
+  <div class="grid md:grid-cols-2 gap-4">
+    {% for job in category.jobs.all %}
+
+    <!-- prettier-ignore -->
+
+    {% include 'includes/job_card.html' %}
+
+    {% empty %}
+
+    <!-- prettier-ignore -->
+
+    {% include 'includes/card_empty.html' with info="Aucun emploi" %} 
+
+    {% endfor %}
+  </div>
+
+  {% include 'includes/pagination.html' %}
+
+  <a href="{% url 'jobs:category_list' %}">Retour</a>
+</section>
+{% endblock %}

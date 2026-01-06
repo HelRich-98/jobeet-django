@@ -1,0 +1,39 @@
+{% if is_paginated %}
+<div class="flex justify-center mt-12">
+  <div class="join">
+    <!-- Previous -->
+    {% if page_obj.has_previous %}
+    <a
+      href="?page={{ page_obj.previous_page_number }}"
+      class="join-item btn btn-outline"
+    >
+      «
+    </a>
+    {% else %}
+    <button class="join-item btn btn-outline btn-disabled">«</button>
+    {% endif %}
+
+    <!-- Pages -->
+    {% for num in paginator.page_range %} {% if page_obj.number == num %}
+    <button class="join-item btn btn-primary">{{ num }}</button>
+
+    <!-- prettier-ignore -->
+
+    {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+    <a href="?page={{ num }}" class="join-item btn btn-outline"> {{ num }} </a>
+    {% endif %} {% endfor %}
+
+    <!-- Next -->
+    {% if page_obj.has_next %}
+    <a
+      href="?page={{ page_obj.next_page_number }}"
+      class="join-item btn btn-outline"
+    >
+      »
+    </a>
+    {% else %}
+    <button class="join-item btn btn-outline btn-disabled">»</button>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

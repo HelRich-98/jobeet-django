@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Position</th>
+      <th>Company</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ job.location|default:"Brazzaville" }}</td>
+      <td>{{ job.position }}</td>
+      <td>{{ job.company.name }}</td>
+    </tr>
+  </tbody>
+</table>

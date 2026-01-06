@@ -1,1 +1,26 @@
 {% extends 'base.html' %}
+
+<!-- prettier-ignore -->
+
+{% block hero %}
+
+<!-- prettier-ignore -->
+
+{% include 'includes/hero.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+<section class="py-16">
+  <div class="grid grid-cols-1 gap-4">
+    <a class="btn" href="{% url 'jobs:job_list' %}"
+      >Explorer la liste des emplois</a
+    >
+
+    <a class="btn" href="{% url 'jobs:category_list' %}"
+      >Explorer les emplois par categories</a
+    >
+  </div>
+</section>
+{% endblock %}

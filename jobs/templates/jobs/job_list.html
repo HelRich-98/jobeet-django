@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+<!-- prettier-ignore -->
+
+{% block title %}Liste des emplois{% endblock %}
+
+{% block content %}
+<section class="py-16 space-y-4">
+  <div
+    class="text-base-content pb-5 text-left text-lg font-semibold rtl:text-right"
+  >
+    Liste des emplois
+    <p class="text-base-content/80 mt-1 text-sm font-normal">
+      Browse a list of category information such as name, job's count & more.
+    </p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    {% for job in job_list %}
+
+    <!-- prettier-ignore -->
+
+    {% include 'includes/job_card.html' %}
+
+    {% empty %}
+
+    <!-- prettier-ignore -->
+
+    {% include 'includes/card_empty.html' with info="Aucun emploi" %} 
+
+    {% endfor %}
+  </div>
+
+  {% include 'includes/pagination.html' %}
+</section>
+{% endblock %}
