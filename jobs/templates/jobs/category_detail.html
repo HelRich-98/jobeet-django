@@ -1,58 +1,68 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 <!-- prettier-ignore -->
 
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
-<section class="py-16 space-y-4">
-  <h3 class="text-2xl font-bold">{{ category.name }}</h3>
+<section class="py-16">
+  <div class="max-w-6xl mx-auto space-y-8">
+    <!-- Header -->
+    <header class="space-y-2">
+      <h1 class="text-2xl font-bold">{{ category.name }}</h1>
 
-  <div
-    id="show-hide-collapse-heading"
-    class="collapse hidden w-full overflow-hidden transition-[height] duration-300"
-    aria-labelledby="show-hide-collapse"
-  >
-    <p class="text-base-content/80">{{ category.description }}</p>
+      {% if category.description %}
+      <div
+        id="category-description"
+        class="collapse hidden overflow-hidden transition-[height] duration-300"
+      >
+        <p class="text-base-content/70 max-w-3xl">{{ category.description }}</p>
+      </div>
+
+      <button
+        type="button"
+        class="collapse-toggle link link-primary inline-flex items-center text-sm"
+        aria-expanded="false"
+        aria-controls="category-description"
+        data-collapse="#category-description"
+      >
+        <span class="collapse-open:hidden">Afficher la description</span>
+        <span class="collapse-open:block hidden">Masquer la description</span>
+        <span
+          class="icon-[tabler--chevron-down] collapse-open:rotate-180 ms-2 size-4"
+        ></span>
+      </button>
+      {% endif %}
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- Job list -->
+    <div class="grid gap-5 md:grid-cols-2">
+      {% for job in jobs %}
+
+      <!-- prettier-ignore -->
+
+      {% include "includes/job_card.html" %}
+
+      {% empty %}
+
+      <!-- prettier-ignore -->
+
+      {% include "includes/card_empty.html" with info="Aucune offre dans cette catégorie" %}
+        
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% include "includes/pagination.html" %}
+
+    <!-- Back link -->
+    <div>
+      <a href="{% url 'jobs:category_list' %}" class="link link-hover">
+        ← Retour aux catégories
+      </a>
+    </div>
   </div>
-
-  <button
-    type="button"
-    class="collapse-toggle link link-primary inline-flex items-center"
-    id="show-hide-collapse"
-    aria-expanded="false"
-    aria-controls="show-hide-collapse-heading"
-    data-collapse="#show-hide-collapse-heading"
-  >
-    <span class="collapse-open:hidden">Plus</span>
-    <span class="collapse-open:block hidden">Moins</span>
-    <span
-      class="icon-[tabler--chevron-down] collapse-open:rotate-180 ms-2 size-4"
-    ></span>
-  </button>
-
-  <div class="divider"></div>
-
-  <!-- job's categorie-->
-
-  <div class="grid md:grid-cols-2 gap-4">
-    {% for job in category.jobs.all %}
-
-    <!-- prettier-ignore -->
-
-    {% include 'includes/job_card.html' %}
-
-    {% empty %}
-
-    <!-- prettier-ignore -->
-
-    {% include 'includes/card_empty.html' with info="Aucun emploi" %} 
-
-    {% endfor %}
-  </div>
-
-  {% include 'includes/pagination.html' %}
-
-  <a href="{% url 'jobs:category_list' %}">Retour</a>
 </section>
 {% endblock %}

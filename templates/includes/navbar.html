@@ -10,8 +10,9 @@
     </a>
   </div>
   <div class="navbar-end items-center gap-4">
-    <a class="btn btn-primary" href="{% url 'jobs:job_create' %}">
-      <span class="">POST A JOB</span>
-    </a>
+    <a href="{% url 'jobs:job_list' %}" class="link link-hover">Offres</a>
+    <a href="{% url 'jobs:category_list' %}" class="link link-hover"
+      >Catégories</a
+    >
   </div>
 </nav>

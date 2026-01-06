@@ -15,7 +15,7 @@ class JobForm(forms.ModelForm):
             "job_type",
             "description",
             "expired_at",
-            "is_valid",
+            "is_validate",
         )
 
     def __init__(self, *args, **kwargs):

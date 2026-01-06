@@ -1,36 +1,38 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 <!-- prettier-ignore -->
 
 {% block title %}Liste des emplois{% endblock %}
 
 {% block content %}
-<section class="py-16 space-y-4">
-  <div
-    class="text-base-content pb-5 text-left text-lg font-semibold rtl:text-right"
-  >
-    Liste des emplois
-    <p class="text-base-content/80 mt-1 text-sm font-normal">
-      Browse a list of category information such as name, job's count & more.
-    </p>
+<section class="py-16">
+  <div class="max-w-6xl mx-auto space-y-6">
+    <!-- Header -->
+    <div class="text-base-content">
+      <h1 class="text-2xl font-bold">Liste des emplois</h1>
+      <p class="text-base-content/70 mt-1 text-sm">
+        Consultez les offres d’emploi actuellement disponibles.
+      </p>
+    </div>
+
+    <!-- Job list -->
+    <div class="grid gap-5 md:grid-cols-2">
+      {% for job in job_list %}
+
+      <!-- prettier-ignore -->
+
+      {% include "includes/job_card.html" %}
+      {% empty %}
+
+      <!-- prettier-ignore -->
+
+      {% include "includes/card_empty.html" with info="Aucun emploi disponible" %}
+      
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% include "includes/pagination.html" %}
   </div>
-
-  <div class="grid md:grid-cols-2 gap-5">
-    {% for job in job_list %}
-
-    <!-- prettier-ignore -->
-
-    {% include 'includes/job_card.html' %}
-
-    {% empty %}
-
-    <!-- prettier-ignore -->
-
-    {% include 'includes/card_empty.html' with info="Aucun emploi" %} 
-
-    {% endfor %}
-  </div>
-
-  {% include 'includes/pagination.html' %}
 </section>
 {% endblock %}

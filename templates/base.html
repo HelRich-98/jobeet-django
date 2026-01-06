@@ -8,6 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="{% static 'css/flatpickr.css' %}" />
     {% tailwind_css %}
+
+    <!-- prettier-ignore -->
+
+    {% block extra_head %}{% endblock %}
   </head>
 
   <body

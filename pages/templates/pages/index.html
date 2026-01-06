@@ -13,14 +13,35 @@
 {% block content %}
 
 <section class="py-16">
-  <div class="grid grid-cols-1 gap-4">
-    <a class="btn" href="{% url 'jobs:job_list' %}"
-      >Explorer la liste des emplois</a
-    >
+  <div class="max-w-3xl mx-auto text-center mb-10">
+    <h1 class="text-3xl font-bold mb-4">Jobeet – Job Board pédagogique</h1>
 
-    <a class="btn" href="{% url 'jobs:category_list' %}"
-      >Explorer les emplois par categories</a
+    <p class="text-gray-600">
+      Une application Django inspirée du célèbre tutoriel Symfony 1.4. Consultez
+      les offres d’emploi ou explorez-les par catégorie.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+    <a
+      href="{% url 'jobs:job_list' %}"
+      class="card bg-base-100 shadow hover:shadow-md transition"
     >
+      <div class="card-body">
+        <h2 class="card-title">Dernières offres</h2>
+        <p>Voir les offres d’emploi les plus récentes.</p>
+      </div>
+    </a>
+
+    <a
+      href="{% url 'jobs:category_list' %}"
+      class="card bg-base-100 shadow hover:shadow-md transition"
+    >
+      <div class="card-body">
+        <h2 class="card-title">Catégories</h2>
+        <p>Explorer les offres par domaine.</p>
+      </div>
+    </a>
   </div>
 </section>
 {% endblock %}

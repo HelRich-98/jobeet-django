@@ -2,31 +2,41 @@
   class="card hover:motion-scale-out-102 motion-ease-spring-smooth hover:z-30 hover:shadow-lg"
 >
   <div class="card-body">
+    <!-- Category -->
     <div class="mb-3">
-      <a href="{{ job.category.get_absolute_url}}">
-        <span class="badge badge-primary rounded-full"
-          >{{ job.category.name }}</span
-        >
+      <a href="{{ job.category.get_absolute_url }}">
+        <span class="badge badge-primary rounded-full">
+          {{ job.category.name }}
+        </span>
       </a>
     </div>
-    <h5 class="card-title mb-0">{{ job.title }}</h5>
-    <div class="flex flex-wrap gap-3 text-base-content/50 mb-6">
-      <div>{{ job.company.name }}</div>
-      <div class="divider divider-horizontal"></div>
-      <sdiv>{{ job.created_at|date }}</sdiv>
+
+    <!-- Title -->
+    <h5 class="card-title mb-1">{{ job.title }}</h5>
+
+    <!-- Meta -->
+    <div
+      class="flex flex-wrap items-center gap-2 text-sm text-base-content/50 mb-4"
+    >
+      <span>{{ job.company.name }}</span>
+      <span class="opacity-50">•</span>
+      <span>{{ job.created_at|date:"d/m/Y" }}</span>
     </div>
 
-    <div class="mb-4">{{ job.description|truncatewords:20 }}</div>
+    <!-- Description -->
+    <p class="mb-4">{{ job.description|truncatewords:20 }}</p>
 
+    <!-- Footer -->
     <div class="card-actions mt-auto">
       <div class="flex justify-between items-center w-full">
         <span class="badge badge-outline badge-primary rounded-full">
-          {% cycle 'CDI' 'CDO' 'Freelance' %}
+          {{ job.job_type }}
         </span>
 
         <a
           href="{{ job.get_absolute_url }}"
           class="link link-primary no-underline"
+          aria-label="Voir l'offre"
         >
           <span class="icon-[tabler--circle-arrow-right] size-10"></span>
         </a>

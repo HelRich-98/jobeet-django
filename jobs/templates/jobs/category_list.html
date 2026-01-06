@@ -1,57 +1,63 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 <!-- prettier-ignore -->
 
-{% block title %}Categories{% endblock %}
+{% block title %}Catégories{% endblock %}
 
 {% block content %}
 <section class="py-16">
-  <div
-    class="text-base-content pb-5 text-left text-lg font-semibold rtl:text-right"
-  >
-    Liste des categories
-    <p class="text-base-content/80 mt-1 text-sm font-normal">
-      Browse a list of category information such as name, job's count & more.
-    </p>
-  </div>
+  <div class="max-w-6xl mx-auto space-y-6">
+    <!-- Header -->
+    <div class="text-base-content">
+      <h1 class="text-2xl font-bold">Catégories</h1>
+      <p class="text-base-content/70 mt-1 text-sm">
+        Parcourez les catégories et découvrez les offres associées.
+      </p>
+    </div>
 
-  <div class="grid md:grid-cols-2 gap-5">
-    {% for category in category_list %}
+    <!-- Category list -->
+    <div class="grid gap-5 md:grid-cols-2">
+      {% for category in category_list %}
 
-    <div
-      class="card hover:motion-scale-out-102 motion-ease-spring-smooth hover:z-30 hover:shadow-lg"
-    >
-      <div class="card-body">
-        <h5 class="card-title mb-0">{{ category.name }}</h5>
+      <div
+        class="card hover:motion-scale-out-102 motion-ease-spring-smooth hover:z-30 hover:shadow-lg"
+      >
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{ category.name }}</h5>
 
-        <div>{{ category.description|truncatewords:20 }}</div>
+          <p class="mb-4">{{ category.description|truncatewords:20 }}</p>
 
-        <div class="card-actions mt-4">
-          <div class="w-full flex justify-between">
-            <div class="flex items-center">
-              <span
-                class="badge badge-primary badge-soft me-2 rounded-full p-1"
+          <div class="card-actions mt-auto">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex items-center gap-2 text-sm">
+                <span class="badge badge-primary badge-soft rounded-full">
+                  {{ category.job_count }}
+                </span>
+                emplois
+              </div>
+
+              <a
+                href="{{ category.get_absolute_url }}"
+                class="link link-primary no-underline"
+                aria-label="Voir les emplois de la catégorie"
               >
-                {{ category.jobs.count }}
-              </span>
-              Emplois
+                <span class="icon-[tabler--circle-arrow-right] size-10"></span>
+              </a>
             </div>
-
-            <a
-              href="{{ category.get_absolute_url }}"
-              class="link link-primary no-underline"
-            >
-              <span class="icon-[tabler--circle-arrow-right] size-10"></span>
-            </a>
           </div>
         </div>
       </div>
+
+      {% empty %}
+
+      <!-- prettier-ignore -->
+
+      {% include "includes/card_empty.html" with info="Aucune catégorie disponible" %}
+      {% endfor %}
     </div>
 
-    {% empty %} {% include 'includes/card_empty.html' with info="Aucune
-    categorie" %} {% endfor %}
+    <!-- Pagination -->
+    {% include "includes/pagination.html" %}
   </div>
-
-  {% include 'includes/pagination.html' %}
 </section>
 {% endblock %}
